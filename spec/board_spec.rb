@@ -29,5 +29,16 @@ describe Board do
     it 'is an array of various subclasses of Tile, representing the map' do
       expect(board.tiles.map { |x| x.class.name }).to all(match(/\w+Tile/))
     end
+
+    it 'has tiles in the correct position' do
+      state.game.heroes.each_with_index do |h, i|
+        x = h.pos.x
+        y = h.pos.y
+        t = board.tiles.find { |t| t.x == x && t.y == y }
+        expect(t.x).to eq x
+        expect(t.y).to eq y
+        expect(t.text).to eq "@#{i+1}"
+      end
+    end
   end
 end

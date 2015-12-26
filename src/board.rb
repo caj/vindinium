@@ -28,7 +28,7 @@ class Board
     tiles = []
 
     xyloop(tile_str_array) do |str, x, y|
-      t = TileCreator.create(str)
+      t = TileCreator.create(str, x, y)
       tiles << t
     end
 
