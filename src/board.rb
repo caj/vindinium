@@ -32,12 +32,6 @@ class Board
       tiles << t
     end
 
-    #tile_str_array.each_with_index do |row, y|
-    #  row.each_with_index do |str, x|
-    #    t = TileCreator.create(str)
-    #    tiles << t
-    #  end
-    #end
     tiles
   end
 
