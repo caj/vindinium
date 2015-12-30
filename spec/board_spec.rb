@@ -40,5 +40,15 @@ describe Board do
         expect(t.text).to eq "@#{i+1}"
       end
     end
+
+    it "sets the tiles' neighbors properly" do
+      # in the map fixture we're using, 3 of the 4 taverns have a hero next to them
+      # we skip i == 2 because it's the one that doesnt
+      board.tiles.select { |x| x.is_a? TavernTile }.each_with_index do |tavern, i|
+        next if i == 2
+        hero = tavern.nabes.find { |x| x.text[0] == '@' }
+        expect(hero).not_to be_nil
+      end
+    end
   end
 end
