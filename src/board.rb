@@ -42,4 +42,12 @@ class Board
       end
     end
   end
+
+  def idx2xy idx
+    [idx % @size, idx / size]
+  end
+
+  def xy2idx x, y
+    x + (y * @size)
+  end
 end
