@@ -49,6 +49,8 @@ describe Board do
         hero = tavern.nabes.find { |x| x.text[0] == '@' }
         expect(hero).not_to be_nil
       end
+
+      puts board.tiles.first.inspect
     end
   end
 end
