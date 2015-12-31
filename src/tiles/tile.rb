@@ -1,13 +1,11 @@
 class Tile
-  attr_accessor :text, :x, :y, :cost
-  attr_writer :north, :south, :east, :west
+  attr_accessor :text, :x, :y
+  attr_writer :north, :south, :east, :west, :cost
 
   def initialize str, x=0, y=0
     @text = str
     @x = x
     @y = y
-    @north = @east = @south = @west = nil
-    @cost = 100
   end
 
   def north
@@ -26,6 +24,10 @@ class Tile
     @west  || FalseTile
   end
 
+  def cost
+    @cost || 100
+  end
+
   def nabes
     [north, south, east, west].reject { |x| x == FalseTile }
   end
@@ -36,19 +38,32 @@ class Tile
 
   def inspect short = false
     if short
-      return "<#{self.class.name} @text=#{@text} @x=#{@x} @y=#{@y} " +
-             "@north=(#{north.x}, #{north.y})#{north.to_s} " +
-             "@south=(#{south.x}, #{south.y})#{south.to_s} " +
-             "@east=(#{ east.x}, #{ east.y})#{  east.to_s} " +
-             "@west=(#{ west.x}, #{ west.y})#{  west.to_s}>"
+      return "<#{self.class.name} text=#{@text} x=#{@x} y=#{@y} " +
+             "north=(#{north.x}, #{north.y})#{north.to_s} " +
+             "south=(#{south.x}, #{south.y})#{south.to_s} " +
+             "east=(#{ east.x}, #{ east.y})#{  east.to_s} " +
+             "west=(#{ west.x}, #{ west.y})#{  west.to_s}>"
     end
 
-    "<#{self.class.name} @text=#{@text} @x=#{@x} @y=#{@y}\n" +
-      "  @north= #{north.inspect(true)}\n" +
-      "  @south= #{south.inspect(true)}\n" +
-      "  @east= #{  east.inspect(true)}\n" +
-      "  @west= #{  west.inspect(true)}\n" +
+    "<#{self.class.name} text=#{@text} x=#{@x} y=#{@y}\n" +
+      "  north= #{north.inspect(true)}\n" +
+      "  south= #{south.inspect(true)}\n" +
+      "  east= #{  east.inspect(true)}\n" +
+      "  west= #{  west.inspect(true)}\n" +
       " >"
+  end
+
+  def update new_str
+    if @text != new_str
+      handle_change_to new_str
+      @text = new_str
+    end
+  end
+
+  private
+
+  def handle_change_to str
+    # Implement in subclasses
   end
 end
 
