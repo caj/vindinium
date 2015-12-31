@@ -47,22 +47,20 @@ describe Tile do
     end
   end
 
-  describe 'compass dirs' do
-    let(:t) { Tile.new 'tile' }
-    %w(north south east west).each do |dir|
-      describe "##{dir}" do
-        it 'returns the FalseTile class if nil/unset/false' do
-          expect(t.send dir).to be FalseTile
-        end
+  %w(north south east west).each do |dir|
+    describe "##{dir}" do
+      let(:t) { Tile.new 'tile' }
+      it 'returns the FalseTile class if nil/unset/false' do
+        expect(t.send dir).to be FalseTile
+      end
 
-        it 'returns whatever truthy value set to it' do
-          t.send "#{dir}=", 'anything'
-          expect(t.send dir).to eq 'anything'
+      it 'returns whatever truthy value set to it' do
+        t.send "#{dir}=", 'anything'
+        expect(t.send dir).to eq 'anything'
 
-          dir_tile = Tile.new "#{dir}"
-          t.send "#{dir}=", dir_tile
-          expect(t.send dir).to be dir_tile
-        end
+        dir_tile = Tile.new "#{dir}"
+        t.send "#{dir}=", dir_tile
+        expect(t.send dir).to be dir_tile
       end
     end
   end
