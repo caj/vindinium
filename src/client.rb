@@ -7,18 +7,23 @@ Bundler.require
 class Client
   attr_reader :base_url, :last_response, :raw_response
 
-  def initialize base_url = 'http://vindinium.org/api'
+  def initialize base_url = 'http://vindinium.org/api', bot_type = 'BaseBot'
     @base_url = base_url
+    @bot_type = Object.const_get bot_type
   end
 
   def start args = { mode: 'training', key: ENV['VINDINIUM_KEY'], turns: 300 }
     @args = args
+    @bot = @bot_type.new
     send "start_#{args[:mode]}"
   end
 
   def run url, params
     @raw_response = get_raw url, params
-    @last_response = Hashie::Mash.new JSON.parse(@raw_response) unless @raw_response.match /is finished/
+    unless @raw_response.match /is finished/
+      @last_response = Hashie::Mash.new JSON.parse(@raw_response)
+      @bot.update @last_response
+    end
     self
   rescue
     raise "Parse error. Raw: #{@raw_response}"
@@ -26,7 +31,7 @@ class Client
 
   def play
     while !@last_response.finished && @raw_response != 'Vindinium - The game is finished'
-      run @last_response.playUrl, { key: @args[:key], dir: 'Stay' }
+      run @last_response.playUrl, { key: @args[:key], dir: @bot.move }
     end
     self
   end

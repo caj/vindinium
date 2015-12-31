@@ -10,6 +10,10 @@ class Board
     @tiles = make_tiles @tile_strs
   end
 
+  def at(x, y)
+    @tiles[xy2idx(x, y)]
+  end
+
   private
 
   def make_tile_strs longstr

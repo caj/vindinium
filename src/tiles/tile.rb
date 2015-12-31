@@ -1,5 +1,5 @@
 class Tile
-  attr_accessor :text, :x, :y
+  attr_accessor :text, :x, :y, :cost
   attr_writer :north, :south, :east, :west
 
   def initialize str, x=0, y=0
@@ -7,6 +7,7 @@ class Tile
     @x = x
     @y = y
     @north = @east = @south = @west = nil
+    @cost = 100
   end
 
   def north
