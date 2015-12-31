@@ -2,7 +2,7 @@ class Tile
   attr_accessor :text, :x, :y
   attr_writer :north, :south, :east, :west, :cost
 
-  def initialize str, x=0, y=0
+  def initialize str='XX', x=0, y=0
     @text = str
     @x = x
     @y = y

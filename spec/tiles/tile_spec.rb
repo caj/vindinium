@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Tile do
   it 'is initializable' do
-    expect(Tile.new('  ')).not_to be_nil
+    expect(Tile.new).not_to be_nil
   end
 
   describe '#text' do
@@ -13,7 +13,7 @@ describe Tile do
 
   describe '#x' do
     it 'defaults to 0' do
-      expect(Tile.new('##').x).to be 0
+      expect(Tile.new.x).to be 0
     end
 
     it 'is otherwise what the tile was instantiated with' do
@@ -23,7 +23,7 @@ describe Tile do
 
   describe '#y' do
     it 'defaults to 0' do
-      expect(Tile.new('##').y).to be 0
+      expect(Tile.new.y).to be 0
     end
 
     it 'is otherwise what the tile was instantiated with' do
@@ -33,11 +33,11 @@ describe Tile do
 
   describe '#cost' do
     it 'defaults to 100' do
-      expect(Tile.new('##').cost).to be 100
+      expect(Tile.new.cost).to be 100
     end
 
     it 'is writable' do
-      t = Tile.new('  ')
+      t = Tile.new
       expect { t.cost=1000 }.to change { t.cost }.from(100).to 1000
     end
   end
@@ -61,7 +61,7 @@ describe Tile do
 
   %w(north south east west).each do |dir|
     describe "##{dir}" do
-      let(:t) { Tile.new 'tile' }
+      let(:t) { Tile.new }
       it 'returns the FalseTile class if nil/unset/false' do
         expect(t.send dir).to be FalseTile
       end
@@ -70,7 +70,7 @@ describe Tile do
         t.send "#{dir}=", 'anything'
         expect(t.send dir).to eq 'anything'
 
-        dir_tile = Tile.new "#{dir}"
+        dir_tile = Tile.new
         t.send "#{dir}=", dir_tile
         expect(t.send dir).to be dir_tile
       end
