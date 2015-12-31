@@ -18,15 +18,15 @@ class Tile
   end
 
   def east
-    @east || FalseTile
+    @east  || FalseTile
   end
 
   def west
-    @west || FalseTile
+    @west  || FalseTile
   end
 
   def nabes
-    [north, south, east, west].reject { |x| x.nil? }
+    [north, south, east, west].reject { |x| x == FalseTile }
   end
 
   def to_s
@@ -61,7 +61,7 @@ class FalseTile
       -1
     end
 
-    def inspect _
+    def inspect _ = nil
       "FalseTile"
     end
   end

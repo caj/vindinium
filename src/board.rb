@@ -8,7 +8,6 @@ class Board
     @size = @state.game.board.size!
     @tile_strs = make_tile_strs @state.game.board.tiles
     @tiles = make_tiles @tile_strs
-    puts "Tiles done. #{@tiles.length}"
   end
 
   private
