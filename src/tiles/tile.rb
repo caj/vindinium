@@ -52,13 +52,6 @@ class Tile
       "  west= #{  west.inspect(true)}\n" +
       " >"
   end
-
-  def update new_str
-    if @text != new_str
-      handle_change_to new_str
-      @text = new_str
-    end
-  end
 end
 
 class FalseTile

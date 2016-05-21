@@ -76,14 +76,4 @@ describe Tile do
       end
     end
   end
-
-  describe '#update' do
-    context 'when the supplied string differs from @text' do
-      let(:t) { Tile.new 'a' }
-
-      it 'changes the text field to the supplied value' do
-        expect { t.update 'b' }.to change { t.text }.from('a').to 'b'
-      end
-    end
-  end
 end
