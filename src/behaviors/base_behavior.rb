@@ -1,13 +1,11 @@
 class BaseBehavior
-  def initialize state
-    @state = state
-  end
+  class << self
+    def move state
+      "Stay"
+    end
 
-  def move
-    "Stay"
-  end
-
-  def should_act?
-    true
+    def should_act? state
+      true
+    end
   end
 end
