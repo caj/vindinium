@@ -59,12 +59,6 @@ class Tile
       @text = new_str
     end
   end
-
-  private
-
-  def handle_change_to str
-    # Implement in subclasses
-  end
 end
 
 class FalseTile

@@ -84,11 +84,6 @@ describe Tile do
       it 'changes the text field to the supplied value' do
         expect { t.update 'b' }.to change { t.text }.from('a').to 'b'
       end
-
-      it 'calls the private #handle_change_to with the supplied value' do
-        expect(t).to receive(:handle_change_to).with 'b'
-        t.update 'b'
-      end
     end
   end
 end
